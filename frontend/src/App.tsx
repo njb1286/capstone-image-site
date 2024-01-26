@@ -17,6 +17,7 @@ const UpdatePage = lazy(() => import("./Pages/UpdatePage"));
 const HomePage = lazy(() => import("./Pages/HomePage"));
 const LoginPage = lazy(() => import("./Pages/LoginPage"));
 const GeneratePasswordPage = lazy(() => import("./Pages/GeneratePasswordPage"));
+const PageNotFound = lazy(() => import("./Pages/PageNotFound"));
 
 type State = "loading" | "login" | "valid";
 
@@ -71,6 +72,7 @@ function App() {
             <Route element={<Suspense fallback={loadingPage}><UploadPage /></Suspense>} path="/upload" />
             <Route element={<Suspense fallback={loadingPage}><UpdatePage /></Suspense>} path="/update" />
             <Route element={<Suspense fallback={loadingPage}><GeneratePasswordPage /></Suspense>} path="/generate-password" />
+            <Route element={<Suspense fallback={loadingPage}><PageNotFound message="Hmmm... we couldn't find that page" /></Suspense>} path="/*" />
           </Routes>
         </div>
 
