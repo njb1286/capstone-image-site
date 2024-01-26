@@ -6,6 +6,7 @@ import { ActionCreator } from "../types";
 import LoadingPage from "../Components/LoadingPage";
 import { Dispatch } from "@reduxjs/toolkit";
 import { getRequestData } from "../helpers/token";
+import PageNotFound from "../Pages/PageNotFound";
 
 type ReturnType = ActionCreator<{
   COMPONENT: JSX.Element;
@@ -64,7 +65,7 @@ export function useGetImageItem<T extends (string | number) | null>(id: T): Retu
   if (isError) {
     return {
       type: "COMPONENT",
-      payload: <h2>Hmmm... we couldn't find that image...</h2>,
+      payload: <PageNotFound message="Hmmm... we couldn't find that image" />,
     };
   }
 

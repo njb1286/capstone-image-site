@@ -9,8 +9,6 @@ import { useGetImageItem } from "../hooks/useGetImageItem";
 import { getRequestData } from "../helpers/token";
 import { useLazyImage } from "../hooks/useLazyImage";
 
-export const errorComponent = <h2>Hmmm... we couldn't find that image...</h2>;
-
 function ContentPage() {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
