@@ -6,22 +6,28 @@ type Response = {
   tokenIsValid: boolean;
 }
 
-export const validateToken = async (token: string | null) => {
+export const validateToken = async (token: string | null): Promise<{ valid: boolean } | { status: number }> => {
 
-  if (!token) return false;
+  try {
+    if (!token) return { valid: false };
 
-  const response = await fetch(`${backendUrl}/validate-token`, {
-    method: "GET",
-    headers: {
-      token
+    const response = await fetch(`${backendUrl}/validate-token`, {
+      method: "GET",
+      headers: {
+        token
+      }
+    });
+
+    if (response.status === 500) return { status: response.status };
+
+    const data = await response.json() as Response;
+
+    if ("message" in data) {
+      return { valid: false }
     }
-  });
 
-  const data = await response.json() as Response;
-
-  if ("message" in data) {
-    return false;
+    return { valid: data.tokenIsValid };
+  } catch {
+    return { status: 500 };
   }
-
-  return data.tokenIsValid;
 }
