@@ -115,6 +115,14 @@ function HomePage() {
     setMounted(true);
   }, []);
 
+  // Reobserve
+  useEffect(() => {
+    if (loadingPageRef.current) {
+      observer.current.unobserve(loadingPageRef.current);
+      observer.current.observe(loadingPageRef.current);
+    }
+  }, [searchValue]);
+
   useEffect(() => {
     if (!hasMore) return;
 
