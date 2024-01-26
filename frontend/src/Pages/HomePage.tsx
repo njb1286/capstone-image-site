@@ -168,7 +168,9 @@ function HomePage() {
     });
   }, [selectedCategory, searchValue, imageItems, selectedSort]);
 
-  const content = !filteredImageItems.length && !loadingImages ? (
+  const hasNoImageItems = !filteredImageItems.length && !loadingImages;
+
+  const content = hasNoImageItems ? (
     <PageNotFound message="No images were found!" />
   ) : (
     <>
@@ -186,7 +188,7 @@ function HomePage() {
         onChange={setSearchValue}
         onSelectSort={setSelectedSort}
       />
-      <div className={classes.cards} ref={cardsRef}>
+      <div className={`${classes.cards} ${hasNoImageItems ? "" : classes.grid}`} ref={cardsRef}>
         {content}
       </div>
     </>
