@@ -65,7 +65,7 @@ export function useGetImageItem<T extends (string | number) | null>(id: T): Retu
   if (isError) {
     return {
       type: "COMPONENT",
-      payload: <PageNotFound message="Hmmm... we couldn't find that image" />,
+      payload: <PageNotFound hasLink message="Hmmm... we couldn't find that image" />,
     };
   }
 

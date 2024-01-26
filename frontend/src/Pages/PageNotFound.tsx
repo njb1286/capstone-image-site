@@ -4,14 +4,16 @@ import { FaSearch } from "react-icons/fa";
 
 type PageNotFoundProps = {
   message: string;
+  hasLink?: boolean;
 }
 
-const PageNotFound = (props: Readonly<PageNotFoundProps>) => {  return (
+const PageNotFound = (props: Readonly<PageNotFoundProps>) => {
+  return (
     <div className={classes.container}>
       <div className={classes.content}>
         <FaSearch className={classes.icon} />
         <p className={classes.message}>{props.message}</p>
-        <NavLink className={classes.link} to="/">Return to home</NavLink>
+        {props.hasLink && <NavLink className={classes.link} to="/">Return to home</NavLink>}
       </div>
     </div>
   )

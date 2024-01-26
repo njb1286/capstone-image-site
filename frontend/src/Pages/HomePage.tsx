@@ -5,10 +5,10 @@ import classes from "./HomePage.module.scss";
 
 import Card from "../Components/Card";
 import SearchBar, { SearchBarCategory, SearchBarSort } from "../Components/SearchBar";
-import ErrorPage from "../Components/ErrorPage";
 import { ImageState, imageStore } from "../store/images-store";
 import { getCategoryItems, getImageSlice } from "../store/images-actions";
 import LoadingPage from "../Components/LoadingPage";
+import PageNotFound from "./PageNotFound";
 
 const cardHeight = 600;
 
@@ -169,7 +169,7 @@ function HomePage() {
   }, [selectedCategory, searchValue, imageItems, selectedSort]);
 
   const content = !filteredImageItems.length && !loadingImages ? (
-    <ErrorPage message="No images found" />
+    <PageNotFound message="No images were found!" />
   ) : (
     <>
       {filteredImageItems.map((item) => {
