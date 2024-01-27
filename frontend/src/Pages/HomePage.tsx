@@ -105,7 +105,7 @@ function HomePage() {
 
     fn();
   }, [selectedCategory]);
-  
+
   /* 
     For tracking if the component has mounted,
     for making sure that the elements are rendered
@@ -185,7 +185,6 @@ function HomePage() {
       {filteredImageItems.map((item) => {
         return <Card stateToListenTo={selectedSort} {...item} key={item.id} />;
       })}
-      <LoadingPage ref={loadingPageRef} fullScreen={false} className={`${classes["loading-images"]} ${hasMore && selectedCategory === "All" && !searchValue ? classes.visible : ""}`} />
     </>
   );
 
@@ -196,8 +195,11 @@ function HomePage() {
         onChange={setSearchValue}
         onSelectSort={setSelectedSort}
       />
-      <div className={`${classes.cards} ${hasNoImageItems ? "" : classes.grid}`} ref={cardsRef}>
-        {content}
+      <div className={classes["cards-wrapper"]}>
+        <div className={`${classes.cards} ${hasNoImageItems ? "" : classes.grid}`} ref={cardsRef}>
+          {content}
+          <LoadingPage ref={loadingPageRef} fullScreen={false} className={`${classes["loading-images"]} ${hasMore && selectedCategory === "All" && !searchValue ? classes.visible : ""}`} />
+        </div>
       </div>
     </>
   );
