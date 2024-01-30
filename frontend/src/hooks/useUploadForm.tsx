@@ -90,7 +90,7 @@ export function useUploadForm(props: Readonly<UploadFormProps>) {
 
   const [imageComponent, imageValid, image, setImageTouched, setImageValid] = useFormField(
     FormControl,
-    { type: "file", accept: "image/png, image/jpeg, image/jpg" },
+    { as: "input", type: "file", accept: "image/png, image/jpeg, image/jpg" },
     makeInitialState(null),
     (event) => event.target.files![0],
     (value) => {
