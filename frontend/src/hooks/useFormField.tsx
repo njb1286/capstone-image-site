@@ -9,11 +9,6 @@ type Action<TFieldValue> = ActionCreator<{
   SET_ERROR_MESSAGE: string | undefined;
 }>;
 
-type ValidInputElements = {
-  input: HTMLInputElement;
-  textarea: HTMLTextAreaElement;
-}
-
 type State<TFieldValue> = {
   touched: boolean;
   isValid: boolean;
@@ -47,13 +42,12 @@ function formFieldReducer<TFieldValue>(state: State<TFieldValue>, action: Action
  * @returns A tuple containing the component, a boolean indicating whether the field is valid, the value, a function to set the touched state, a function to set the valid state, and a function to set the value
 */
 
-interface InputProps<TElementName extends keyof ValidInputElements> extends FormControlProps, Record<string, any> {
+interface InputProps<TElementName extends keyof HTMLElementTagNameMap> extends FormControlProps, Record<string, any> {
   as: TElementName;
 }
 
-export function useFormField<TFieldValue, TElementName extends keyof ValidInputElements = "input">(
+export function useFormField<TFieldValue, TElementName extends keyof HTMLElementTagNameMap = "input">(
   InputElement: typeof FormControl,
-  // inputProps: FormControlProps & { as?: TElementName } & Record<string, any>,
   inputProps: InputProps<TElementName>,
   initialState: {
     touched: boolean;
@@ -61,12 +55,12 @@ export function useFormField<TFieldValue, TElementName extends keyof ValidInputE
     value: TFieldValue;
     errorMessage: string | undefined;
   },
-  selectChangeableValue: (event: ChangeEvent<ValidInputElements[TElementName]>) => TFieldValue,
+  selectChangeableValue: (event: ChangeEvent<HTMLElementTagNameMap[TElementName]>) => TFieldValue,
   checkValidity: (value: TFieldValue) => string | undefined,
 ) {
   const [state, dispatch] = useReducer<Reducer<State<TFieldValue>, Action<TFieldValue>>>(formFieldReducer, initialState);
 
-  const changeHandler = (event: ChangeEvent<ValidInputElements[TElementName]>) => {
+  const changeHandler = (event: ChangeEvent<HTMLElementTagNameMap[TElementName]>) => {
     dispatch({
       type: "SET_VALUE",
       payload: selectChangeableValue(event),
