@@ -1,15 +1,22 @@
 @import "../helper-styles.scss";
 
-.cards-wrapper {
+.cards {
   height: 100%;
-  overflow-y: scroll;
 
-  .cards.grid {
+  &.grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    overflow-y: scroll;
   }
 }
 
+@media (max-width: $media-width) {
+  .cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    overflow-y: unset;
+  }
+}
 
 .no-images {
   font-size: 3rem;
@@ -23,17 +30,5 @@
 
   &.visible {
     display: flex !important;
-  }
-}
-
-@media (max-width: $media-width) {
-  .cards-wrapper {
-    overflow-y: unset;
-
-    .cards.grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      overflow-y: unset;
-    }
   }
 }

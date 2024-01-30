@@ -14,15 +14,11 @@ type ValidInputElements = {
   textarea: HTMLTextAreaElement;
 }
 
-type State<TFieldValue> = ReturnType<typeof getInitialState<TFieldValue>>;
-
-function getInitialState<TFieldValue>(initialValue: TFieldValue) {
-  return {
-    touched: false,
-    isValid: false,
-    value: initialValue,
-    errorMessage: undefined as string | undefined,
-  }
+type State<TFieldValue> = {
+  touched: boolean;
+  isValid: boolean;
+  value: TFieldValue;
+  errorMessage: string | undefined;
 }
 
 function formFieldReducer<TFieldValue>(state: State<TFieldValue>, action: Action<TFieldValue>) {
